@@ -1,3 +1,4 @@
+<!--Arquivo Principal do Projeto, inclui todos os componentes, etc da página-->
 <template>
   <header>
     <CabecalhoFixo/>
