@@ -1,21 +1,21 @@
 <template>
     <div class="categoria__grupo">
         <div class="categoria__um">
-            <img src="../assets/IMGs/default.png" alt="">
+            <img class="categoria__imagem" src="../assets/IMGs/basicos.png" alt="">
             <p class="categoria__text">Modelos Básicos</p>
-            <button class="categoria__show" type="button" @click="mostrarBasico()">Mostrar Detalhes</button>
+            <button class="categoria__show" type="button" @click="mostrarBasico()"><a class="linker" href="#mostrando">Mostrar Detalhes</a></button>
         </div>
 
         <div class="categoria__dois">
-            <img src="../assets/IMGs/default.png" alt="">
+            <img class="categoria__imagem" src="../assets/IMGs/luxuosos.png" alt="">
             <p class="categoria__text">Modelos Luxuosos</p>
-            <button class="categoria__show" type="button" @click="mostrarLuxo()">Mostrar Detalhes</button>
+            <button class="categoria__show" type="button" @click="mostrarLuxo()"><a class="linker" href="#mostrando">Mostrar Detalhes</a></button>
         </div>
 
         <div class="categoria__tres">
-            <img src="../assets/IMGs/default.png" alt="">
+            <img class="categoria__imagem" src="../assets/IMGs/business.png" alt="">
             <p class="categoria__text">Modelos Business</p>
-            <button class="categoria__show" type="button" @click="mostrarBusiness()">Mostrar Detalhes</button>
+            <button class="categoria__show" type="button" @click="mostrarBusiness()"><a class="linker" href="#mostrando">Mostrar Detalhes</a></button>
         </div>
     </div>
 
@@ -37,17 +37,19 @@
     </div>
 
     <!--Para caso o básico esteja ativo-->
-    <div class="categoria__mostrando" v-if="basico === true">
-        <div class="categoria__separador__um">
-            <img class="categoria__mostrando--imagem" src="../assets/IMGs/pexels-vecislavas-popa-1571467.jpg" alt="">
+    <section id="mostrando">
+        <div class="categoria__mostrando" v-if="basico === true">
+            <div class="categoria__separador__um">
+                <img class="categoria__mostrando--imagem" src="../assets/IMGs/pexels-vecislavas-popa-1571467.jpg" alt="">
+            </div>
+            <div class="categoria__separador__dois">
+                <p class="categoria__mostrando__titulo" ref="modelo">{{ tituloBasico }}</p>
+                <p class="categoria__mostrando__descricao" ref="descricao">{{ descricaoBasico }}</p>
+                <p class="categoria__mostrando__precos" ref="precos">{{ precoBasico }}</p>
+                <button class="categoria__mostrando__direcionar" ref="direcionar">{{ botaoTrocado }}</button>
+            </div>
         </div>
-        <div class="categoria__separador__dois">
-            <p class="categoria__mostrando__titulo" ref="modelo">{{ tituloBasico }}</p>
-            <p class="categoria__mostrando__descricao" ref="descricao">{{ descricaoBasico }}</p>
-            <p class="categoria__mostrando__precos" ref="precos">{{ precoBasico }}</p>
-            <button class="categoria__mostrando__direcionar" ref="direcionar">{{ botaoTrocado }}</button>
-        </div>
-    </div>
+    </section>
 
     <!--Para caso o luxo esteja ativo-->
     <div class="categoria__mostrando" v-if="luxo === true">
@@ -98,10 +100,6 @@ export default defineComponent({
             precoBusiness: "A partir de R$ 6.999,99",
             botaoPadrao: "Selecione a cima",
             botaoTrocado: "Veja mais Deatalhes",
-            imagemPadrao: "../assets/IMGs/pexels-vecislavas-popa-1571453.jpg",
-            imagemBasico: "../assets/IMGs/pexels-m&w-studios-90317.jpg",
-            imagemLuxo: "../assets/IMGs/pexels-monica-silvestre-713149.jpg",
-            imagemBusiness: "../assets/IMGs/pexels-vecislavas-popa-1571467.jpg",
             padrao: true,
             basico: false,
             luxo: false,
@@ -140,10 +138,21 @@ export default defineComponent({
         font-family: 'Roboto Condensed', sans-serif;
     }
 
+    .linker{
+        color: #000;
+        text-decoration: none;
+    }
+
     .categoria__grupo{
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+    }
+
+    .categoria__imagem{
+        width: 220px;
+        height: 220px;
+        margin: 1em 0;
     }
 
     .categoria__um, .categoria__dois, .categoria__tres{
@@ -179,6 +188,8 @@ export default defineComponent({
     .categoria__mostrando--imagem{
         height: 500px;
         width: 800px;
+        max-height: 500px;
+        max-width: 800px;
         object-fit: cover;
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     }
@@ -227,5 +238,31 @@ export default defineComponent({
         text-transform: uppercase;
         box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
         transition: 1s all;
+    }
+
+    @media screen and (min-width: 1281px) and (max-width: 1919px) {
+        .categoria__mostrando{
+            height: 60vh;
+            grid-template-columns: 50% 50%;
+        }
+
+        .categoria__mostrando--imagem{
+            width: 600px;
+            height: 400px;
+            max-height: 400px;
+            max-width: 600px;
+        }
+
+        .categoria__mostrando__titulo{
+            font-size: 2.2em;
+        }
+    
+        .categoria__mostrando__descricao{
+            font-size: 1.4em;
+        }
+    
+        .categoria__mostrando__precos{
+            font-size: 1.1em;
+        }
     }
 </style>
