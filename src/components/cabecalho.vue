@@ -19,9 +19,9 @@
                   Orçamento
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Basic</a></li>
-                  <li><a class="dropdown-item" href="#">Regular</a></li>
-                  <li><a class="dropdown-item" href="#">Premium</a></li>
+                  <li><a class="dropdown-item" href="#">Basicos</a></li>
+                  <li><a class="dropdown-item" href="#">Luxo</a></li>
+                  <li><a class="dropdown-item" href="#">Business</a></li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -41,6 +41,6 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'CabecalhoFixo' //Nome do Componente para exportação
+    name: 'CabecalhoFixo' //Define o nome do Componente para exportação
 })
 </script>
