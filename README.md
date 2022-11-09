@@ -1,4 +1,6 @@
-# cortinas-order
+# Loja de Cortinas
+Feito em VueJS 3 por João Pedro<br/>
+Novembro de 2022
 
 ## Project setup
 ```
