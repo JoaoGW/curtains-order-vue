@@ -80,6 +80,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { ModalBox } from './modalbox.vue'
     
 export default defineComponent({
     name: 'CategoriasShow', //Define o nome do componente para exportação
@@ -128,6 +129,10 @@ export default defineComponent({
             this.luxo = false;
             this.business = true;
         }
+    },
+
+    components: {
+        ModalBox
     }
 })
 </script>
