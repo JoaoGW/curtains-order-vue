@@ -46,7 +46,7 @@
                 <p class="categoria__mostrando__titulo" ref="modelo">{{ tituloBasico }}</p>
                 <p class="categoria__mostrando__descricao" ref="descricao">{{ descricaoBasico }}</p>
                 <p class="categoria__mostrando__precos" ref="precos">{{ precoBasico }}</p>
-                <button class="categoria__mostrando__direcionar" ref="direcionar">{{ botaoTrocado }}</button>
+                <button class="categoria__mostrando__direcionar" ref="direcionar" @click="cliquesBasico()">{{ botaoTrocado }}</button>
             </div>
         </div>
     </section>
@@ -60,7 +60,7 @@
             <p class="categoria__mostrando__titulo" ref="modelo">{{ tituloLuxo }}</p>
             <p class="categoria__mostrando__descricao" ref="descricao">{{ descricaoLuxo }}</p>
             <p class="categoria__mostrando__precos" ref="precos">{{ precoLuxo }}</p>
-            <button class="categoria__mostrando__direcionar" ref="direcionar">{{ botaoTrocado }}</button>
+            <button class="categoria__mostrando__direcionar" ref="direcionar" @click="cliquesLuxo()">{{ botaoTrocado }}</button>
         </div>
     </div>
 
@@ -73,14 +73,64 @@
             <p class="categoria__mostrando__titulo" ref="modelo">{{ tituloBusiness }}</p>
             <p class="categoria__mostrando__descricao" ref="descricao">{{ descricaoBusiness }}</p>
             <p class="categoria__mostrando__precos" ref="precos">{{ precoBusiness }}</p>
-            <button class="categoria__mostrando__direcionar" ref="direcionar">{{ botaoTrocado }}</button>
+            <button class="categoria__mostrando__direcionar" ref="direcionar" @click="cliquesBusiness()">{{ botaoTrocado }}</button>
         </div>
     </div>
+
+    <div class="modal" tabindex="-1" v-if="abertoBasico === true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Você se Interessou!</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Voce ja se interessou por este produto e clicou nele { quantidadeBasico } vezes.<br/>Que tal adicioná-lo em seu carrinho de compras?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" tabindex="-1" v-if="abertoLuxo === true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Você se Interessou!</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Voce ja se interessou por este produto e clicou nele { quantidadeLuxo } vezes.<br/>Que tal adicioná-lo em seu carrinho de compras?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" tabindex="-1" v-if="abertoBusiness === true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Você se Interessou!</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Voce ja se interessou por este produto e clicou nele { quantidadeBusiness } vezes.<br/>Que tal adicioná-lo em seu carrinho de compras?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { ModalBox } from './modalbox.vue'
     
 export default defineComponent({
     name: 'CategoriasShow', //Define o nome do componente para exportação
@@ -104,35 +154,58 @@ export default defineComponent({
             padrao: true,
             basico: false,
             luxo: false,
-            business: false
+            business: false,
+            abertoBasico: false,
+            abertoLuxo: false,
+            abertoBusiness: false,
+            quantidadeBasico: 0,
+            quantidadeLuxo: 0,
+            quantidadeBusiness: 0
         }
     },
 
     methods: {
         async mostrarBasico(){
-            this.padrao = false;
-            this.basico = true;
-            this.luxo = false;
-            this.business = false;
+            this.padrao = false
+            this.basico = true
+            this.luxo = false
+            this.business = false
         },
 
         async mostrarLuxo(){
-            this.padrao = false;
-            this.basico = false;
-            this.luxo = true;
-            this.business = false;
+            this.padrao = false
+            this.basico = false
+            this.luxo = true
+            this.business = false
         },
 
         async mostrarBusiness(){
-            this.padrao = false;
-            this.basico = false;
-            this.luxo = false;
-            this.business = true;
-        }
-    },
+            this.padrao = false
+            this.basico = false
+            this.luxo = false
+            this.business = true
+        },
 
-    components: {
-        ModalBox
+        async cliquesBasico(){
+            this.abertoBasico = true
+            this.abertoLuxo = false
+            this.abertoBusiness = false
+            this.quantidadeBasico = this.quantidadeBasico + 1
+        },
+
+        async cliquesLuxo(){
+            this.abertoBasico = false
+            this.abertoLuxo = true
+            this.abertoBusiness = false
+            this.quantidadeLuxo = this.quantidadeLuxo + 1
+        },
+
+        async cliquesBusiness(){
+            this.abertoBasico = false
+            this.abertoLuxo = false
+            this.abertoBusiness = true
+            this.quantidadeBusiness = this.quantidadeBusiness + 1
+        }
     }
 })
 </script>
